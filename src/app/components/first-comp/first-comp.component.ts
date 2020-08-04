@@ -1,15 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 
 @Component({
   selector: 'app-first-comp',
   templateUrl: './first-comp.component.html',
-  styleUrls: ['./first-comp.component.scss']
+  styleUrls: ['./first-comp.component.scss'],
 })
 export class FirstCompComponent implements OnInit {
+  title: string = 'First Component works'
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void {}
 }
