@@ -12,7 +12,7 @@
     "commit": "git cz",
     "lint:fix": "ng lint --fix",
     "format:fix": "precise-commits",
-    "precommit-lint": "run-s format:fix",
+    "precommit-lint": "run-s format:fix commitmsg",
     "release": "standard-version",
     "commitmsg": "validate-commit-msg"
   },
@@ -75,8 +75,7 @@
         "perf",
         "test",
         "chore",
-        "revert",
-        "sos"
+        "revert"
       ],
       "scope": {
         "required": true,
