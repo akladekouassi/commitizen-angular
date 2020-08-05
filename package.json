@@ -8,9 +8,13 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "---------- ALL ABOUT COMMIT -------------------------------------------------------------------------------------": "",
     "commit": "git cz",
-    "commitmsg": "validate-commit-msg",
-    "release": "standard-version"
+    "lint:fix": "ng lint --fix",
+    "format:fix": "precise-commits",
+    "precommit-lint": "run-s format:fix",
+    "release": "standard-version",
+    "commitmsg": "validate-commit-msg"
   },
   "private": true,
   "dependencies": {
@@ -30,6 +34,9 @@
     "@angular-devkit/build-angular": "~0.1000.0",
     "@angular/cli": "~10.0.0",
     "@angular/compiler-cli": "~10.0.0",
+    "@commitlint/cli": "^9.1.1",
+    "@commitlint/config-angular": "^9.1.1",
+    "@commitlint/config-conventional": "^9.1.1",
     "@types/jasmine": "~3.5.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
@@ -44,6 +51,9 @@
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~3.3.0",
     "karma-jasmine-html-reporter": "^1.5.0",
+    "npm-run-all": "^4.1.5",
+    "precise-commits": "^1.0.2",
+    "prettier": "^2.0.5",
     "protractor": "~7.0.0",
     "standard-version": "^8.0.2",
     "ts-node": "~8.3.0",
@@ -65,13 +75,35 @@
         "perf",
         "test",
         "chore",
-        "revert"
+        "revert",
+        "sos"
       ],
+      "scope": {
+        "required": true,
+        "allowed": [
+          "*"
+        ],
+        "validate": false,
+        "multiple": true
+      },
       "warnOnFail": false,
-      "maxSubjectLength": 100,
+      "maxSubjectLength": 150,
       "subjectPattern": "^[a-z]+/[A-Z]+-[0-9]+ - .*",
       "subjectPatternErrorMsg": "Subject must be in format 'cms/WEB-123 - Commit message'",
-      "helpMessage": "Exemple: type(scope): jira/WEB-25 - your message"
+      "helpMessage": "Exemple: type(scope): jira/WEB-25 - your message",
+      "autoFix": false
+    }
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-angular"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run precommit-lint",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "post-commit": "git update-index -g"
     }
   }
 }
